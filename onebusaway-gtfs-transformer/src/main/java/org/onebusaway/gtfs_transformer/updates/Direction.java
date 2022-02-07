@@ -11,18 +11,19 @@ class Direction implements Comparable<Direction> {
 
     public static final int DIRECTION_OUTBOUND = 0;
     public static final int DIRECTION_INBOUND = 1;
+    public static final int DIRECTION_UNKNOWN = -1;
     private static final String DIRECTION_CODE_SEPARATOR = ">";
 
-    private String directionCode;
-    private int directionId;
+    private final String directionCode;
+    private final int directionId;
 
     public static Direction from(Trip trip) {
         return new Direction(trip.getDirectionCode());
     }
 
-    public Direction(String directionCode) {
-        this.directionCode = directionCode;
-        this.directionId = calculateDirectionId(directionCode);
+    public Direction(String code) {
+        this.directionCode = (code == null) ? "" : code;
+        this.directionId = calculateDirectionId(code);
     }
 
     public int getDirectionId() {
@@ -111,6 +112,9 @@ class Direction implements Comparable<Direction> {
     }
 
     private int calculateDirectionId(final String rawDirection) {
+        if (rawDirection == null || rawDirection.isEmpty()) {
+            return DIRECTION_UNKNOWN;
+        }
         final String cleaned = rawDirection.replaceAll("[0-9]", "");
         final char start = cleaned.charAt(0);
         final char end = cleaned.charAt(cleaned.length() - 1);
