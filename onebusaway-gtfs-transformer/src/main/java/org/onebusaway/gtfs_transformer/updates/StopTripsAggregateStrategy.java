@@ -49,6 +49,7 @@ public class StopTripsAggregateStrategy implements GtfsTransformStrategy {
 	    				trip.getTripLongName(),
 	    				trip.getRoute().getType(),
 	    				trip.getTripHeadsign(),
+						trip.getTripHeadsignCode(),
 	    				calendar.getStartDate().getAsString(),
 	    				calendar.getEndDate().getAsString());
 	    		trips.add(tripAggregate);
@@ -62,6 +63,7 @@ public class StopTripsAggregateStrategy implements GtfsTransformStrategy {
 
 	    private String tripLongName;
 	    private String headsign;
+		private String headsignCode; 
 	    private String routeId;
 	    private String routeShortName;
 	    private String routeShortNameSortable;
@@ -69,13 +71,14 @@ public class StopTripsAggregateStrategy implements GtfsTransformStrategy {
 	    private String startDate;
 	    private String endDate;
 
-	    public TripAggregate(String routeId, String routeShortName, String routeShortNameSortable, String tripLongName, int routeType, String headsign, String startDate, String endDate) {
+	    public TripAggregate(String routeId, String routeShortName, String routeShortNameSortable, String tripLongName, int routeType, String headsign, String headsignCode, String startDate, String endDate) {
 	        this.routeId = routeId;
 	        this.routeShortName = routeShortName;
 	        this.routeShortNameSortable = routeShortNameSortable;
 	        this.tripLongName = tripLongName;
 	        this.routeType = routeType;
 	        this.headsign = headsign;
+			this.headsignCode = headsignCode; 
 	        this.startDate = startDate;
 	        this.endDate = endDate;
 	    }
@@ -87,6 +90,14 @@ public class StopTripsAggregateStrategy implements GtfsTransformStrategy {
 	    public void setHeadsign(String headsign) {
 	        this.headsign = headsign;
 	    }
+
+		public String getHeadsignCode() {
+            return headsignCode;
+        }
+
+        public void setHeadsignCode(String headsignCode) {
+            this.headsignCode = headsignCode;
+        }
 
 	    public String getRouteId() {
 	        return routeId;

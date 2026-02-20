@@ -41,6 +41,9 @@ public final class Trip extends IdentityBean<AgencyAndId> {
   @CsvField(optional = true)
   private String tripHeadsign;
 
+  @CsvField(name = "trip_headsign_code", optional = true)
+  private String tripHeadsignCode;
+
   @CsvField(optional = true)
   private String routeShortName;
 
@@ -88,6 +91,7 @@ public final class Trip extends IdentityBean<AgencyAndId> {
     this.serviceId = obj.serviceId;
     this.tripShortName = obj.tripShortName;
     this.tripHeadsign = obj.tripHeadsign;
+    this.tripHeadsignCode = obj.tripHeadsignCode;
     this.routeShortName = obj.routeShortName;
     this.directionId = obj.directionId;
     this.blockId = obj.blockId;
@@ -99,6 +103,15 @@ public final class Trip extends IdentityBean<AgencyAndId> {
     this.directionCode = obj.directionCode;
     this.primaryTrip = obj.primaryTrip;
     this.routeType = obj.routeType;
+  }
+
+  public String getTripHeadsignCode() {
+      return tripHeadsignCode;
+  }
+
+  public void setTripHeadsignCode(String tripHeadsignCode) {
+      this.tripHeadsignCode = tripHeadsignCode;
+      this.directionCode = tripHeadsignCode;
   }
 
   public AgencyAndId getId() {
